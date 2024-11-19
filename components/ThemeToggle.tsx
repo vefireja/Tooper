@@ -5,11 +5,15 @@ import { MoonStar } from '~/lib/icons/MoonStar';
 import { Sun } from '~/lib/icons/Sun';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { cn } from '~/lib/utils';
+import { Button } from './ui/button';
+import { Text } from './ui/text';
 
 export function ThemeToggle() {
   const { isDarkColorScheme, setColorScheme } = useColorScheme();
   return (
-    <Pressable
+    <Button
+      variant={'ghost'}
+      size={'default'}
       onPress={() => {
         const newTheme = isDarkColorScheme ? 'light' : 'dark';
         setColorScheme(newTheme);
@@ -21,17 +25,24 @@ export function ThemeToggle() {
       {({ pressed }) => (
         <View
           className={cn(
-            'flex-1 aspect-square pt-0.5 justify-center items-start web:px-5',
+            'flex flex-row gap-2 justify-center items-start web:px-5',
             pressed && 'opacity-70'
           )}
         >
+
           {isDarkColorScheme ? (
-            <MoonStar className='text-foreground' size={23} strokeWidth={1.25} />
+            <>
+              <Text>Dark Theme</Text>
+              <MoonStar className='text-foreground' size={23} strokeWidth={1.25} />
+            </>
           ) : (
-            <Sun className='text-foreground' size={24} strokeWidth={1.25} />
+            <>
+              <Text>Light Theme</Text>
+              <Sun className='text-foreground' size={24} strokeWidth={1.25} />
+            </>
           )}
         </View>
       )}
-    </Pressable>
+    </Button>
   );
 }

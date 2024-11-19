@@ -29,9 +29,9 @@ export default function AuthProvider({ children }: PropsWithChildren) {
       return;
     }
     const fetchProfile = async () => {
-      let { data, error } = await supabase
+      let { data, error }: { data: any, error: any } = await supabase
         .from('profiles')
-        .select('*')
+        .select(`* ,programs(*)`)
         .eq('id', session.user.id)
         .single();
       setProfile(data);

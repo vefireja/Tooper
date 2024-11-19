@@ -39,17 +39,20 @@ export default function InputSelect({ handleOnValueChange }: { handleOnValueChan
 
   return (
     <Select onValueChange={(e) => {
-      handleOnValueChange(e?.value);;
+      handleOnValueChange(e?.value);
     }}>
       <SelectTrigger className='w-full'>
         <SelectValue
+        style={{
+          fontFamily:"Manrope_400Regular"
+        }}
           className='text-foreground text-sm native:text-lg'
           placeholder='Pilih jurusan'
         />
       </SelectTrigger>
-      <SelectContent insets={contentInsets} className='w-[350px]'>
+      <SelectContent insets={contentInsets} className='mt-2 w-[350px]'>
         <SelectGroup>
-          <SelectLabel>Jurusan</SelectLabel>
+          <SelectLabel style={{fontFamily:"Manrope_700Bold"}}>Jurusan</SelectLabel>
           {
             jurusan.map((item: any, index) => (
               <SelectItem key={index} label={item.program_name} value={item.id}>
