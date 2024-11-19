@@ -6,7 +6,7 @@ import { useAuth } from '~/provider/AuthProviders'
 export default function AuthLayout() {
   const {user} = useAuth()
   if(user) {
-    return <Redirect href="/(home)/index"/>
+    return <Redirect href="/(home)"/>
   }
 
   return (
