@@ -1,101 +1,42 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import Animated, { FadeInUp, FadeOutDown, LayoutAnimationConfig } from 'react-native-reanimated';
-import { Info } from '~/lib/icons/Info';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Image, View } from 'react-native';
 import { Button } from '~/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '~/components/ui/card';
 import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
-import InputSelect from '~/components/InputSelect';
 import { Redirect, router } from 'expo-router';
-import { supabase } from '~/lib/supabase';
 import { useAuth } from '~/provider/AuthProviders';
 
-const GITHUB_AVATAR_URI =
-  'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
-
 export default function Screen() {
-  const {user} = useAuth();
-  const [progress, setProgress] = React.useState(78);
+  const { user } = useAuth();
 
-  function updateProgressValue() {
-    setProgress(Math.floor(Math.random() * 100));
-  }
-  if(user){
-    return <Redirect href='/(home)'/>
+  if (user) {
+    return <Redirect href='/(home)' />
   }
   return (
-    <View className=' flex-1 justify-center items-center gap-5 p-6 bg-secondary/30'>
-      <Card className='w-full max-w-sm p-6 rounded-2xl'>
-        <CardHeader className='items-center'>
-          <Avatar alt="Rick Sanchez's Avatar" className='w-24 h-24'>
-            <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
-            <AvatarFallback>
-              <Text>RS</Text>
-            </AvatarFallback>
-          </Avatar>
-          <View className='p-3' />
-          <CardTitle className=' pb-2 text-center'>Rick Sanchez</CardTitle>
-          <View className='flex-row'>
-            <CardDescription className='text-base font-semibold'>Scientist</CardDescription>
-            <Tooltip delayDuration={150}>
-              <TooltipTrigger className='px-2 pb-0.5 active:opacity-50'>
-                <Info size={14} strokeWidth={2.5} className='w-4 h-4 text-foreground/70' />
-              </TooltipTrigger>
-              <TooltipContent className='py-2 px-4 shadow'>
-                <Text className='native:text-lg'>Freelance</Text>
-              </TooltipContent>
-            </Tooltip>
-          </View>
-        </CardHeader>
-        <CardContent>
-          <View className='flex-row justify-around gap-3'>
-            <View className='items-center'>
-              <Text className='text-sm text-muted-foreground'>Dimension</Text>
-              <Text className='text-xl font-semibold'>C-137</Text>
-            </View>
-            <View className='items-center'>
-              <Text className='text-sm text-muted-foreground'>Age</Text>
-              <Text className='text-xl font-semibold'>70</Text>
-            </View>
-            <View className='items-center'>
-              <Text className='text-sm text-muted-foreground'>Species</Text>
-              <Text className='text-xl font-semibold'>Human</Text>
-            </View>
-          </View>
-        </CardContent>
-        <CardFooter className='flex-col gap-3 pb-0'>
-          <Progress value={progress} className='h-2' indicatorClassName='bg-sky-600' />
-          <View />
-          <Button
-            variant='outline'
-            className='shadow shadow-foreground/5'
-            onPress={async () => {
-              await supabase.auth.signOut()
-            }}
-          >
-            <Text>Sign Out</Text>
-          </Button>
-          <Button
-            variant='outline'
-            className='shadow shadow-foreground/5'
-            onPress={() => {
-              router.push("/signin")
-            }}
-          >
-            <Text>Sign in</Text>
-          </Button>
-        </CardFooter>
-      </Card>
+    <View className='flex-1 p-6 bg-secondary/30'>
+      <View className='flex-1 justify-center items-center'>
+        <Image source={require('~/assets/images/icon.png')} className='w-56 h-56' />
+        <Text className='text-center text-xl mt-5' style={{ fontFamily: "Manrope_700Bold" }}>
+          Persiapkan tools perkuliahan anda bersama{' '}
+          <Text className='text-[#FED542] text-xl' style={{ fontFamily: "Manrope_700Bold" }}>
+            Too
+            <Text className='text-[#093DF4] text-xl' style={{ fontFamily: "Manrope_700Bold" }}>per</Text>
+          </Text>
+        </Text>
+      </View>
+      <View className='mt-auto'>
+        <Button className='w-full' onPress={()=>{
+          router.push('/signin')
+        }}>
+          <Text className='text-xl' style={{
+            fontFamily: "Manrope_400Regular"
+          }}>
+            Mulai sekarang
+          </Text>
+        </Button>
+      </View>
     </View>
+
+
   );
 }

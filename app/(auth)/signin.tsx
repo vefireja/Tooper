@@ -15,10 +15,7 @@ export default function SignIn() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { profile } = useAuth()
-
-    console.log(profile);
-    
+    const { profile } = useAuth()    
 
     async function signInWithEmail() {
         setLoading(true);
