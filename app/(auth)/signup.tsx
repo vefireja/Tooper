@@ -4,7 +4,6 @@ import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label';
 import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
-import { Link } from 'expo-router';
 import { Eye } from '~/lib/icons/Eye'
 import { EyeOff } from '~/lib/icons/EyeOff'
 import InputSelect from '~/components/InputSelect';

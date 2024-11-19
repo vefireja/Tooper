@@ -8,15 +8,14 @@ import { Link } from 'expo-router';
 import { Eye } from '~/lib/icons/Eye'
 import { EyeOff } from '~/lib/icons/EyeOff'
 import { supabase } from '~/lib/supabase';
-import { useAuth } from '~/provider/AuthProviders';
+
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { profile } = useAuth()    
-
+  
     async function signInWithEmail() {
         setLoading(true);
         const { error } = await supabase.auth.signInWithPassword({
@@ -98,7 +97,7 @@ export default function SignIn() {
                         </Button>
                     </View>
                 </View>
-                <Button variant='default' onPress={signInWithEmail} className='w-full'>
+                <Button disabled={loading} variant='default' onPress={signInWithEmail} className='w-full'>
                     <Text className='text-xl' style={{
                         fontFamily: "Manrope_400Regular"
                     }}>Masuk</Text>

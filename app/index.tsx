@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Image, View } from 'react-native';
 import { Button } from '~/components/ui/button';
-import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Redirect, router } from 'expo-router';
 import { useAuth } from '~/provider/AuthProviders';

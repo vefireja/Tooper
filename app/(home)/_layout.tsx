@@ -1,4 +1,3 @@
-import { View } from 'react-native'
 import React from 'react'
 import { Link, Redirect, Stack } from 'expo-router'
 import HeaderAvatar from '~/components/HeaderAvatar'

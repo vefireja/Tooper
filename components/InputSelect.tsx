@@ -12,7 +12,6 @@ import {
 import { supabase } from '~/lib/supabase';
 
 export default function InputSelect({ handleOnValueChange }: { handleOnValueChange: any }) {
-  const [error, setError] = useState([])
   const [jurusan, setJurusan] = useState([])
   const insets = useSafeAreaInsets();
   const contentInsets = {
@@ -27,8 +26,6 @@ export default function InputSelect({ handleOnValueChange }: { handleOnValueChan
       const { data, error }: { data: any, error: any } = await supabase.from("programs").select('*')
       if (error) {
         console.log(error);
-
-        setError(error)
         return
       }
       setJurusan(data || [])
