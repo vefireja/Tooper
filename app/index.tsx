@@ -16,6 +16,8 @@ import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import InputSelect from '~/components/InputSelect';
+import { router } from 'expo-router';
+import { supabase } from '~/lib/supabase';
 
 const GITHUB_AVATAR_URI =
   'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
@@ -67,28 +69,25 @@ export default function Screen() {
           </View>
         </CardContent>
         <CardFooter className='flex-col gap-3 pb-0'>
-          <View className='flex-row items-center overflow-hidden'>
-            <Text className='text-sm text-muted-foreground'>Productivity:</Text>
-            <LayoutAnimationConfig skipEntering>
-              <Animated.View
-                key={progress}
-                entering={FadeInUp}
-                exiting={FadeOutDown}
-                className='w-11 items-center'
-              >
-                <Text className='text-sm font-bold text-sky-600'>{progress}%</Text>
-              </Animated.View>
-            </LayoutAnimationConfig>
-          </View>
-          <InputSelect/>
           <Progress value={progress} className='h-2' indicatorClassName='bg-sky-600' />
           <View />
           <Button
             variant='outline'
             className='shadow shadow-foreground/5'
-            onPress={updateProgressValue}
+            onPress={async () => {
+              await supabase.auth.signOut()
+            }}
           >
-            <Text>Update</Text>
+            <Text>Sign Out</Text>
+          </Button>
+          <Button
+            variant='outline'
+            className='shadow shadow-foreground/5'
+            onPress={() => {
+              router.push("/signin")
+            }}
+          >
+            <Text>Sign in</Text>
           </Button>
         </CardFooter>
       </Card>

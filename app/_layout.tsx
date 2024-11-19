@@ -12,6 +12,7 @@ import { PortalHost } from '@rn-primitives/portal';
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
 import { Manrope_200ExtraLight, Manrope_300Light, Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold, Manrope_800ExtraBold, useFonts } from '@expo-google-fonts/manrope';
+import AuthProvider from '~/provider/AuthProviders';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -86,9 +87,11 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Slot />
-      <PortalHost />
+      <AuthProvider>
+        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+        <Slot />
+        <PortalHost />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

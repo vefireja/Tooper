@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   Select,
@@ -8,8 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { supabase } from '~/lib/supabase';
 
-export default function InputSelect() {
+export default function InputSelect({ handleOnValueChange }: { handleOnValueChange: any }) {
+  const [error, setError] = useState([])
+  const [jurusan, setJurusan] = useState([])
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -18,32 +22,40 @@ export default function InputSelect() {
     right: 12,
   };
 
+  useEffect(() => {
+    async function fetchJurusan() {
+      const { data, error }: { data: any, error: any } = await supabase.from("programs").select('*')
+      if (error) {
+        console.log(error);
+
+        setError(error)
+        return
+      }
+      setJurusan(data || [])
+    }
+    fetchJurusan()
+  }, [])
+
+
   return (
-    <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
-      <SelectTrigger className='w-[250px]'>
+    <Select onValueChange={(e) => {
+      handleOnValueChange(e?.value);;
+    }}>
+      <SelectTrigger className='w-full'>
         <SelectValue
           className='text-foreground text-sm native:text-lg'
-          placeholder='Select a fruit'
+          placeholder='Pilih jurusan'
         />
       </SelectTrigger>
-      <SelectContent insets={contentInsets} className='w-[250px]'>
+      <SelectContent insets={contentInsets} className='w-[350px]'>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem label='Apple' value='apple'>
-            Apple
-          </SelectItem>
-          <SelectItem label='Banana' value='banana'>
-            Banana
-          </SelectItem>
-          <SelectItem label='Blueberry' value='blueberry'>
-            Blueberry
-          </SelectItem>
-          <SelectItem label='Grapes' value='grapes'>
-            Grapes
-          </SelectItem>
-          <SelectItem label='Pineapple' value='pineapple'>
-            Pineapple
-          </SelectItem>
+          <SelectLabel>Jurusan</SelectLabel>
+          {
+            jurusan.map((item: any, index) => (
+              <SelectItem key={index} label={item.program_name} value={item.id}>
+                {item.program_name}
+              </SelectItem>
+            ))}
         </SelectGroup>
       </SelectContent>
     </Select>
