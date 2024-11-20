@@ -4,7 +4,7 @@ import { router, useLocalSearchParams } from 'expo-router'
 import { supabase } from '~/lib/supabase'
 import { Button } from '~/components/ui/button'
 import { Text } from '~/components/ui/text'
-import { Dialog,  DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog'
 
 export default function ToolScreen() {
     const { id } = useLocalSearchParams()
@@ -49,10 +49,10 @@ export default function ToolScreen() {
                                         </Text>
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className='max-w-96'>
+                                <DialogContent className='max-w-[300px] '>
                                     <DialogHeader>
                                         <DialogTitle>Panduan Penggunaan</DialogTitle>
-                                        <DialogDescription asChild>
+                                        <DialogDescription>
                                             {/* <ScrollView className='h-[400px]'>
                                                 {tool.usageguide.map((guide: any, index: any) => (
                                                     <Text key={index} style={{ fontFamily: "Manrope_500Medium" }} className='mb-2 text-xl'>
@@ -60,7 +60,7 @@ export default function ToolScreen() {
                                                     </Text>
                                                 ))}
                                             </ScrollView> */}
-                                            <FlatList data={tool.usageguide} className='h-screen-safe' renderItem={({ item, index }) => (
+                                            <FlatList data={tool.usageguide} className='h-[450px]'  renderItem={({ item, index }) => (
                                                 <Text key={index} style={{ fontFamily: "Manrope_500Medium" }} className='mb-2 text-xl'>
                                                     {index + 1}.{' '}{item}
                                                 </Text>
@@ -81,11 +81,11 @@ export default function ToolScreen() {
                                         </Text>
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className='max-w-96 '>
+                                <DialogContent className='max-w-[350px]'>
                                     <DialogHeader>
                                         <DialogTitle style={{ fontFamily: "Manrope_700Bold" }}>Konfirmasi Unduhan</DialogTitle>
                                         <DialogDescription >
-                                            <View className='w-full flex-1 h-20'>
+                                            <View className='w-full flex-1 h-28'>
                                                 <Text className='text-xl' style={{
                                                     fontFamily: "Manrope_300Light"
                                                 }}>Anda akan dialihkan ke link berikut: {' '}
