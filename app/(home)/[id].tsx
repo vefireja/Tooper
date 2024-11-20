@@ -1,12 +1,10 @@
 import { View, Image, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useLocalSearchParams } from 'expo-router'
+import { router, useLocalSearchParams } from 'expo-router'
 import { supabase } from '~/lib/supabase'
 import { Button } from '~/components/ui/button'
 import { Text } from '~/components/ui/text'
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog'
-import { Input } from '~/components/ui/input'
-import { Label } from '~/components/ui/label'
+import { Dialog,  DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog'
 
 export default function ToolScreen() {
     const { id } = useLocalSearchParams()
@@ -51,7 +49,7 @@ export default function ToolScreen() {
                                         </Text>
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className='max-w-[350px]'>
+                                <DialogContent className='max-w-96'>
                                     <DialogHeader>
                                         <DialogTitle>Panduan Penggunaan</DialogTitle>
                                         <DialogDescription asChild>
@@ -62,7 +60,7 @@ export default function ToolScreen() {
                                                     </Text>
                                                 ))}
                                             </ScrollView> */}
-                                            <FlatList data={tool.usageguide} renderItem={({ item, index }) => (
+                                            <FlatList data={tool.usageguide} className='h-screen-safe' renderItem={({ item, index }) => (
                                                 <Text key={index} style={{ fontFamily: "Manrope_500Medium" }} className='mb-2 text-xl'>
                                                     {index + 1}.{' '}{item}
                                                 </Text>
@@ -83,43 +81,25 @@ export default function ToolScreen() {
                                         </Text>
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className='max-w-[350px]'>
+                                <DialogContent className='max-w-96 '>
                                     <DialogHeader>
-                                        <DialogTitle style={{fontFamily:"Manrope_700Bold"}}>Konfirmasi Unduhan</DialogTitle>
+                                        <DialogTitle style={{ fontFamily: "Manrope_700Bold" }}>Konfirmasi Unduhan</DialogTitle>
                                         <DialogDescription >
-                                            <View>
-                                                <Text className='text-sm' style={{
-                                                    fontFamily:"Manrope_300Light"
-                                                }}>Silakan masukkan email anda, tools akan segera dikirimkan melalui email yang anda masukkan</Text>
-                                            </View>
-                                            <View className='flex w-full gap-3'>
-                                                <Label nativeID='inputEmail' >
-                                                    <Text className='text-lg' style={{
-                                                        fontFamily: "Manrope_600SemiBold"
-                                                    }}>Email</Text>
-                                                </Label>
-                                                <Input
-                                                    placeholder='example@mail.com'
-                                                    value={email}
-                                                    className='w-full'
-                                                    style={{
+                                            <View className='w-full flex-1 h-20'>
+                                                <Text className='text-xl' style={{
+                                                    fontFamily: "Manrope_300Light"
+                                                }}>Anda akan dialihkan ke link berikut: {' '}
+                                                    <Text className='text-xl underline' style={{
                                                         fontFamily: "Manrope_400Regular"
-                                                    }}
-                                                    onChangeText={setEmail}
-                                                    aria-labelledby='inputEmail'
-                                                    aria-errormessage='emailError'
-                                                    keyboardType='email-address'
-                                                    autoComplete='off'
-                                                />
+                                                    }}>{tool.link_unduh}</Text>
+                                                </Text>
                                             </View>
                                         </DialogDescription>
                                     </DialogHeader>
                                     <DialogFooter>
-                                        <DialogClose asChild>
-                                            <Button>
-                                                <Text style={{fontFamily:"Manrope_400Regular"}}>OK</Text>
-                                            </Button>
-                                        </DialogClose>
+                                        <Button onPress={() => router.push(tool.link_unduh)} >
+                                            <Text style={{ fontFamily: "Manrope_400Regular" }}>OK</Text>
+                                        </Button>
                                     </DialogFooter>
                                 </DialogContent>
                             </Dialog>

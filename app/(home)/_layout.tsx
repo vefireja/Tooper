@@ -3,6 +3,7 @@ import { Link, Redirect, Stack } from 'expo-router'
 import HeaderAvatar from '~/components/HeaderAvatar'
 import { Text } from '~/components/ui/text'
 import { useAuth } from '~/provider/AuthProviders'
+import { Settings2 } from '~/lib/icons/Setting'
 
 export default function HomeLayout() {
   const { user } = useAuth()
@@ -12,10 +13,11 @@ export default function HomeLayout() {
   }
   return (
     <Stack screenOptions={{
+      headerBackButtonDisplayMode: "minimal",
       headerTitleAlign: "center",
       headerRight: props =>
         <Link href='/profile'>
-          <HeaderAvatar />
+          <Settings2  className='w-20 h-20 text-foreground'/>
         </Link>
       ,
       headerTitle: props => (

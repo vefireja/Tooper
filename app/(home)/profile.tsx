@@ -10,19 +10,20 @@ import { useAuth } from '~/provider/AuthProviders'
 
 export default function Profile() {
     const { profile } = useAuth()
-    const GITHUB_AVATAR_URI =
-        'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
+
     return (
         <>
             <Stack.Screen options={{
                 presentation: 'modal',
-                animation: 'fade',
-                headerShown: false,
+                animation:"slide_from_bottom",
+                headerTransparent:true,
+                headerTitle:"",
+                headerRight:undefined
             }} />
             <View className=' flex-1 justify-center items-center gap-5 p-6 bg-secondary/30'>
                 <View className='flex items-center gap-5'>
                     <Avatar alt="Rick Sanchez's Avatar" className='w-32 h-32'>
-                        <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
+                        <AvatarImage source={require('~/assets/images/icon.png')} />
                         <AvatarFallback>
                             <Text>RS</Text>
                         </AvatarFallback>
