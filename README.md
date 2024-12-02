@@ -5,9 +5,9 @@ A starting point to help you set up your project quickly and use the common comp
 ## Features
 
 - NativeWind v4
-- Dark and light mode (Mode Gelap Terang)
+- Dark and light mode (Mode Gelap Terang) 
     - Android Navigation Bar matches mode
     - Persistant mode
 - Common components
-    - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+    - ThemeToggle, Avatar, Button, Card, Progress, Text
 
